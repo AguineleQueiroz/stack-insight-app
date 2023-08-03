@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateSupport;
+use App\Models\Support;
+use App\Services\SupportServices;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+
+class SupportController extends Controller
+{
+    /**
+     * @param SupportServices $service
+     */
+    public function __construct(protected SupportServices $service) {}
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function index(Request $request)
+    {
+        $supports = $this->service->getAll($request->filter);
+        return view('admin.supports.index', compact('supports'));
+    }
+
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function create()
+    {
+        return view('admin.supports.create');
+    }
+
+    /**
+     * @param StoreUpdateSupport $request
+     * @param Support $support
+     * @return RedirectResponse
+     */
+    public function store(StoreUpdateSupport $request, Support $support)
+    {
+        $data = $request->validated();
+        $data['status'] = 'active';
+        $support->create($data);
+        return redirect()->route('supports.index');
+    }
+
+
+    /**
+     * @param string|int $id
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
+     */
+    public function show(string|int $id)
+    {
+        $support = $this->service->findOne($id);
+        if (!$support) {
+            return back();
+        }
+        return view('admin.supports.show', compact('support'));
+    }
+
+
+    /**
+     * @param string|int $id
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
+     */
+    public function edit(string | int $id)
+    {
+        if(!$support = $this->service->findOne($id) ) {
+            return back();
+        }
+        return view('admin.supports.edit', compact('support'));
+    }
+
+    /**
+     * @param StoreUpdateSupport $request
+     * @param Support $support
+     * @param string|int $id
+     * @return RedirectResponse
+     */
+    public function update(StoreUpdateSupport $request, Support $support, string | int $id)
+    {
+        if(!$support = $support->where('id', $id)->first()) {
+            return back();
+        }
+        $support->update($request->validated());
+        return redirect()->route('supports.index');
+    }
+
+    /**
+     * @param string|int $id
+     * @return RedirectResponse
+     */
+    public function destroy(string | int $id)
+    {
+        $this->service->delete($id);
+        return redirect()->route('supports.index');
+    }
+}
