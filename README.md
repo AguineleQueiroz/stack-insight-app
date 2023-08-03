@@ -1,14 +1,15 @@
 
+# Setup Docker Laravel 10 com PHP 8.1
 # Forum Application
 Developed using Laravel framework in version 10 + Docker.
 
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone -b main https://github.com/AguineleQueiroz/forum-laravel.git
+https://github.com/AguineleQueiroz/forum-laravel.git
 ```
 ```sh
-cd forum
+cd app-laravel
 ```
 
 
