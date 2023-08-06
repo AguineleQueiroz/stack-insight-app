@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\DTO\CreateSupportDTO;
+use App\DTO\UpdateSupportDTO;
 use stdClass as stdClassAlias;
 /*
  * **************************************************************************
@@ -20,15 +22,11 @@ class SupportServices
     }
 
     /**
-     * @param string $subject
-     * @param string $content
-     * @param string $status
+     * @param CreateSupportDTO $dto
      * @return stdClassAlias
      */
-    public function new(string $subject, string $content, string $status): stdClassAlias {
-        return  $this->repository->new(
-            $subject, $content, $status
-        );
+    public function new(CreateSupportDTO $dto): stdClassAlias {
+        return  $this->repository->new($dto);
     }
 
     /**
@@ -49,16 +47,11 @@ class SupportServices
     }
 
     /**
-     * @param string|int $id
-     * @param string $subject
-     * @param string $content
-     * @param string $status
+     * @param UpdateSupportDTO $dto
      * @return stdClassAlias|null
      */
-    public function update(string | int $id, string $subject, string $content, string $status): stdClassAlias | null {
-        return  $this->repository->update(
-            $id, $subject, $content, $status
-        );
+    public function update(UpdateSupportDTO $dto): stdClassAlias | null {
+        return  $this->repository->update($dto);
     }
     /**
      * @param string|int $id

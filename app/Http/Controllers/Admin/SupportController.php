@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTO\CreateSupportDTO;
+use App\DTO\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
@@ -25,7 +27,7 @@ class SupportController extends Controller
      */
     public function index(Request $request)
     {
-        $supports = $this->service->getAll($request->filter);
+        $supports = $this->service->getAll(filter: $request->filter);
         return view('admin.supports.index', compact('supports'));
     }
 
@@ -39,14 +41,13 @@ class SupportController extends Controller
 
     /**
      * @param StoreUpdateSupport $request
-     * @param Support $support
      * @return RedirectResponse
      */
-    public function store(StoreUpdateSupport $request, Support $support)
+    public function store(StoreUpdateSupport $request)
     {
-        $data = $request->validated();
-        $data['status'] = 'active';
-        $support->create($data);
+        $this->service->new(
+            CreateSupportDTO::makeFromRequest($request)
+        );
         return redirect()->route('supports.index');
     }
 
@@ -58,9 +59,7 @@ class SupportController extends Controller
     public function show(string|int $id)
     {
         $support = $this->service->findOne($id);
-        if (!$support) {
-            return back();
-        }
+        if (!$support) return back();
         return view('admin.supports.show', compact('support'));
     }
 
@@ -79,16 +78,15 @@ class SupportController extends Controller
 
     /**
      * @param StoreUpdateSupport $request
-     * @param Support $support
-     * @param string|int $id
      * @return RedirectResponse
      */
-    public function update(StoreUpdateSupport $request, Support $support, string | int $id)
+    public function update(StoreUpdateSupport $request)
     {
-        if(!$support = $support->where('id', $id)->first()) {
-            return back();
-        }
-        $support->update($request->validated());
+        /** @var Support $support */
+        $support = $this->service->update(
+            UpdateSupportDTO::makeFromRequest($request)
+        );
+        if(!$support) return back();
         return redirect()->route('supports.index');
     }
 
