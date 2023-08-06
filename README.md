@@ -1,5 +1,4 @@
 
-# Setup Docker Laravel 10 com PHP 8.1
 # Forum Application
 Developed using Laravel framework in version 10 + Docker.
 
