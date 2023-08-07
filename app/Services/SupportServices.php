@@ -2,30 +2,24 @@
 
 namespace App\Services;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
-use stdClass as stdClassAlias;
-/*
- * **************************************************************************
- * Service layer pattern implementation
- * **************************************************************************
- */
+use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
+use App\Repositories\SupportRepositoryInterface;
+use stdClass;
 class SupportServices
 {
-    protected $repository;
+    protected SupportRepositoryInterface $repository;
 
-    /**
-     * @return void
-     */
-    public function __constructor() {
-
+    public function __constructor(
+        SupportRepositoryInterface $repository,
+    ) {
+        $this->repository = $repository;
     }
 
     /**
      * @param CreateSupportDTO $dto
-     * @return stdClassAlias
+     * @return stdClass
      */
-    public function new(CreateSupportDTO $dto): stdClassAlias {
+    public function new(CreateSupportDTO $dto): stdClass {
         return  $this->repository->new($dto);
     }
 
@@ -39,18 +33,18 @@ class SupportServices
 
     /**
      * @param string|int $id
-     * @return stdClassAlias|null
+     * @return stdClass|null
      */
-    public function findOne(string | int $id): stdClassAlias | null
+    public function findOne(string | int $id): stdClass | null
     {
         return $this->repository->findOne($id);
     }
 
     /**
      * @param UpdateSupportDTO $dto
-     * @return stdClassAlias|null
+     * @return stdClass|null
      */
-    public function update(UpdateSupportDTO $dto): stdClassAlias | null {
+    public function update(UpdateSupportDTO $dto): stdClass | null {
         return  $this->repository->update($dto);
     }
     /**
