@@ -1,32 +1,71 @@
 <?php
 
-use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
-use stdClass;
-class SupportEloquentORM implements \App\Repositories\SupportRepositoryInterface
-{
+namespace App\Repositories;
 
+use App\Models\Support;
+use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
+use \App\Repositories\SupportRepositoryInterface;
+use stdClass;
+class SupportEloquentORM implements SupportRepositoryInterface
+{
+    public function __construct(protected Support $modelSupport){}
+
+    /**
+     * @param string|null $filter
+     * @return array
+     */
     public function getAll(string $filter = null): array
     {
-        // TODO: Implement getAll() method.
+        return $this->modelSupport->where(function ($query) use ($filter) {
+            if ($filter) {
+                $query->where('subject', $filter);
+                $query->orWhere('content', 'like', "%{$filter}%");
+            }
+        })->get()->toArray();
     }
 
+    /**
+     * @param int|string $id
+     * @return stdClass|null
+     */
     public function findOne(int|string $id): stdClass|null
     {
-        // TODO: Implement findOne() method.
+        $support = $this->modelSupport->find($id);
+        $data = $support ? (object) $support->toArray() : null;
+        return $data;
     }
 
+    /**
+     * @param CreateSupportDTO $dto
+     * @return stdClass
+     */
     public function new(CreateSupportDTO $dto): stdClass
     {
-        // TODO: Implement new() method.
+        $supportDataArray = (array) $dto;
+        $newSupport = $this->modelSupport->create($supportDataArray);
+        /*transform in stdClass*/
+        return (object)$newSupport->toArray();
     }
 
+    /**
+     * @param UpdateSupportDTO $dto
+     * @return stdClass|null
+     */
     public function update(UpdateSupportDTO $dto): stdClass|null
-    {
-        // TODO: Implement update() method.
+    {   $supportDataArray = (array) $dto;
+        $support = $this->modelSupport->find($dto->id);
+        if (!$support){
+            return null;
+        }
+        return ($support->update($supportDataArray))->toArray();
     }
 
+    /**
+     * @param int|string $id
+     * @return void
+     */
     public function delete(int|string $id): void
     {
-        // TODO: Implement delete() method.
+        $this->modelSupport->findOrFail($dto)->delete();
     }
 }

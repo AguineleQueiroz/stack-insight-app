@@ -7,13 +7,9 @@ use App\Repositories\SupportRepositoryInterface;
 use stdClass;
 class SupportServices
 {
-    protected SupportRepositoryInterface $repository;
-
-    public function __constructor(
-        SupportRepositoryInterface $repository,
-    ) {
-        $this->repository = $repository;
-    }
+    public function __construct(
+        protected SupportRepositoryInterface $repository
+    ){}
 
     /**
      * @param CreateSupportDTO $dto

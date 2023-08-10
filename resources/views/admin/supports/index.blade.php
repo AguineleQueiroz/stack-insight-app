@@ -17,17 +17,17 @@
     <tbody>
     @foreach ($supports as $support)
         <tr>
-            <td>{{ $support->subject}}</td>
-            <td>{{ $support->status}}</td>
-            <td>{{ $support->content}}</td>
+            <td>{{ $support['subject']}}</td>
+            <td>{{ $support['status']}}</td>
+            <td>{{ $support['content']}}</td>
             <td>
-                <a href="{{ route('supports.show', [$support->id])}}">view</a>
+                <a href="{{ route('supports.show', $support['id'])}}">view</a>
             </td>
             <td>
-                <a href="{{ route('supports.edit', [$support->id])}}">edit</a>
+                <a href="{{ route('supports.edit', $support['id'])}}">edit</a>
             </td>
             <td>
-                <form action="{{ route('supports.destroy', [$support->id])}}" method="POST">
+                <form action="{{ route('supports.destroy', $support['id'])}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit">delete</button>

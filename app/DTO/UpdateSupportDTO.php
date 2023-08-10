@@ -7,13 +7,13 @@ use App\Http\Requests\StoreUpdateSupport;
 class UpdateSupportDTO
 {
     /**
-     * @param string $int
+     * @param string $id
      * @param string $subject
      * @param string $content
      * @param string $status
      */
     public function  __construct(
-        public string $int,
+        public string $id,
         public string $subject,
         public string $content,
         public string $status
