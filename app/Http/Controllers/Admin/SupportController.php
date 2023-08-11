@@ -16,10 +16,12 @@ use Illuminate\Http\Request;
 
 class SupportController extends Controller
 {
+
     /**
      * @param SupportServices $service
      */
     public function __construct(protected SupportServices $service) {}
+
 
     /**
      * @param Request $request
@@ -27,7 +29,11 @@ class SupportController extends Controller
      */
     public function index(Request $request)
     {
-        $supports = $this->service->getAll(filter: $request->filter);
+        $supports = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter,
+        );
         return view('admin.supports.index', compact('supports'));
     }
 
@@ -38,6 +44,7 @@ class SupportController extends Controller
     {
         return view('admin.supports.create');
     }
+
 
     /**
      * @param StoreUpdateSupport $request
@@ -79,6 +86,7 @@ class SupportController extends Controller
         return view('admin.supports.edit', compact('support'));
     }
 
+
     /**
      * @param StoreUpdateSupport $request
      * @return RedirectResponse
@@ -94,6 +102,7 @@ class SupportController extends Controller
         }
         return redirect()->route('supports.index');
     }
+
 
     /**
      * @param string|int $id

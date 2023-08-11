@@ -8,7 +8,28 @@ use \App\Repositories\SupportRepositoryInterface;
 use stdClass;
 class SupportEloquentORM implements SupportRepositoryInterface
 {
+    /**
+     * @param Support $modelSupport
+     */
     public function __construct(protected Support $modelSupport){}
+
+
+    /**
+     * @param int $page
+     * @param int $totalPerPage
+     * @param string|null $filter
+     * @return PaginateInterface
+     */
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginateInterface
+    {
+        $supportsPage =  $this->modelSupport->where(function ($query) use ($filter) {
+            if ($filter) {
+                $query->where('subject', $filter);
+                $query->orWhere('content_body', 'like', "%{$filter}%");
+            }
+        })->paginate($totalPerPage, ['*'], 'page', $page);
+    }
+
 
     /**
      * @param string|null $filter
@@ -24,6 +45,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         })->get()->toArray();
     }
 
+
     /**
      * @param int|string $id
      * @return stdClass|null
@@ -34,6 +56,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         $data = $support ? (object) $support->toArray() : null;
         return $data;
     }
+
 
     /**
      * @param CreateSupportDTO $dto
@@ -46,6 +69,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         /*transform in stdClass*/
         return (object)$newSupport->toArray();
     }
+
 
     /**
      * @param UpdateSupportDTO $dto
@@ -62,6 +86,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         /* transform in stdClass and return */
         return (object)$support->toArray();
     }
+
 
     /**
      * @param int|string $id

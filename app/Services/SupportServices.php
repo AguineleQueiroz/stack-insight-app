@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\PaginateInterface;
 use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
 use App\Repositories\SupportRepositoryInterface;
 use stdClass;
@@ -11,6 +12,19 @@ class SupportServices
         protected SupportRepositoryInterface $repository
     ){}
 
+    /**
+     * @param int $page
+     * @param int $totalPerPage
+     * @param string|null $filter
+     * @return PaginateInterface
+     */
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null) {
+        return $this->repository->paginate(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter,
+        );
+    }
     /**
      * @param CreateSupportDTO $dto
      * @return stdClass
