@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->enum('status', ['active', 'pending', 'completed']);
-            $table->text('content');
+            $table->text('content_body');
             $table->timestamps();
         });
     }

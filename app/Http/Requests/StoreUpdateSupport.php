@@ -25,9 +25,10 @@ class StoreUpdateSupport extends FormRequest
     {
         return $this->isMethod('PATCH') ? [
             'subject' => Rule::unique(Support::class, 'subject')->ignore($this->id),
+            'content_body' => 'nullable',
         ] : [
             'subject' => 'required|min:3|max:255|unique:supports',
-            'content' => [
+            'content_body' => [
                 'required',
                 'min:3',
                 'max:2000',

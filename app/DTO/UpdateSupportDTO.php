@@ -9,13 +9,13 @@ class UpdateSupportDTO
     /**
      * @param string $id
      * @param string $subject
-     * @param string $content
+     * @param string $content_body
      * @param string $status
      */
     public function  __construct(
         public string $id,
         public string $subject,
-        public string $content,
+        public string $content_body,
         public string $status
     ){}
 
@@ -27,7 +27,7 @@ class UpdateSupportDTO
         return new self(
             $request->id,
             $request->subject,
-            $request->content,
+            $request->content_body,
             'active'/*$request->status*/
         );
     }

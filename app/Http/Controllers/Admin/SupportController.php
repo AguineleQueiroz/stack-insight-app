@@ -48,7 +48,7 @@ class SupportController extends Controller
         $this->service->new(
             CreateSupportDTO::makeFromRequest($request)
         );
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('message', 'Stored success.');
     }
 
 
@@ -59,7 +59,10 @@ class SupportController extends Controller
     public function show(string|int $id)
     {
         $support = $this->service->findOne($id);
-        if (!$support) return back();
+        if (!$support) {
+            return back();
+        }
+        $support = (array)$support;
         return view('admin.supports.show', compact('support'));
     }
 
@@ -86,7 +89,9 @@ class SupportController extends Controller
         $support = $this->service->update(
             UpdateSupportDTO::makeFromRequest($request)
         );
-        if(!$support) return back();
+        if(!$support) {
+            return back();
+        }
         return redirect()->route('supports.index');
     }
 

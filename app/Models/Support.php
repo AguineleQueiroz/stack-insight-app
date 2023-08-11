@@ -10,8 +10,8 @@ class Support extends Model
     use HasFactory;
 
     protected $fillable = [
-        'subject', 
-        'content',
+        'subject',
+        'content_body',
         'status'
     ];
 }

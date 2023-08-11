@@ -19,7 +19,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         return $this->modelSupport->where(function ($query) use ($filter) {
             if ($filter) {
                 $query->where('subject', $filter);
-                $query->orWhere('content', 'like', "%{$filter}%");
+                $query->orWhere('content_body', 'like', "%{$filter}%");
             }
         })->get()->toArray();
     }
@@ -52,12 +52,15 @@ class SupportEloquentORM implements SupportRepositoryInterface
      * @return stdClass|null
      */
     public function update(UpdateSupportDTO $dto): stdClass|null
-    {   $supportDataArray = (array) $dto;
+    {
         $support = $this->modelSupport->find($dto->id);
         if (!$support){
             return null;
         }
-        return ($support->update($supportDataArray))->toArray();
+        $supportDataArray = (array) $dto;
+        $support->update($supportDataArray);
+        /* transform in stdClass and return */
+        return (object)$support->toArray();
     }
 
     /**
