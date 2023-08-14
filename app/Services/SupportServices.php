@@ -18,7 +18,7 @@ class SupportServices
      * @param string|null $filter
      * @return PaginateInterface
      */
-    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null) {
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginateInterface {
         return $this->repository->paginate(
             page: $page,
             totalPerPage: $totalPerPage,

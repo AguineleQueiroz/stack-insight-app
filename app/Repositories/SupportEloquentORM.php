@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Support;
 use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
-use \App\Repositories\SupportRepositoryInterface;
 use stdClass;
 class SupportEloquentORM implements SupportRepositoryInterface
 {
@@ -25,9 +24,10 @@ class SupportEloquentORM implements SupportRepositoryInterface
         $supportsPage =  $this->modelSupport->where(function ($query) use ($filter) {
             if ($filter) {
                 $query->where('subject', $filter);
-                $query->orWhere('content_body', 'like', "%{$filter}%");
+                $query->orWhere('content_body', 'like', "%$filter%");
             }
         })->paginate($totalPerPage, ['*'], 'page', $page);
+        return new PaginationPresenter($supportsPage);
     }
 
 
@@ -40,7 +40,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         return $this->modelSupport->where(function ($query) use ($filter) {
             if ($filter) {
                 $query->where('subject', $filter);
-                $query->orWhere('content_body', 'like', "%{$filter}%");
+                $query->orWhere('content_body', 'like', "%$filter%");
             }
         })->get()->toArray();
     }
@@ -53,8 +53,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
     public function findOne(int|string $id): stdClass|null
     {
         $support = $this->modelSupport->find($id);
-        $data = $support ? (object) $support->toArray() : null;
-        return $data;
+        return $support ? (object) $support->toArray() : null;
     }
 
 
