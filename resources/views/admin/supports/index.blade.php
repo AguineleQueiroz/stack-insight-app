@@ -12,15 +12,15 @@
             <th></th>
         </thead>
         <tbody>
-            @foreach ($supports as $support)
+            @foreach ($supports->items() as $support)
                 <tr>
-                    <td>{{ $support['subject']}}</td>
-                    <td>{{ $support['content_body']}}</td>
-                    <td>{{ $support['status']}}</td>
+                    <td>{{ $support->subject}}</td>
+                    <td>{{ $support->content_body}}</td>
+                    <td>{{ $support->status}}</td>
                     <td>
-                        <a href="{{ route('supports.show', $support['id'])}}">view</a>
-                        <a href="{{ route('supports.edit', $support['id'])}}">edit</a>
-                        <form action="{{ route('supports.destroy', $support['id'])}}" method="POST">
+                        <a href="{{ route('supports.show', $support->id)}}">view</a>
+                        <a href="{{ route('supports.edit', $support->id)}}">edit</a>
+                        <form action="{{ route('supports.destroy', $support->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">delete</button>
@@ -30,4 +30,5 @@
             @endforeach
         </tbody>
     </table>
+    <x-pagination :paginator="$supports" :appends="$filters" />
 @endsection
