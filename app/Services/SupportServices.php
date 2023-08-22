@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
+use App\DTO\{Supports\CreateSupportDTO, Supports\UpdateSupportDTO};
 use App\Repositories\PaginateInterface;
-use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
 use App\Repositories\SupportRepositoryInterface;
 use stdClass;
+
 class SupportServices
 {
     public function __construct(

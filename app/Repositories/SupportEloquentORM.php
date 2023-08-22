@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use App\DTO\{Supports\CreateSupportDTO, Supports\UpdateSupportDTO};
 use App\Models\Support;
-use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
 use stdClass;
+
 class SupportEloquentORM implements SupportRepositoryInterface
 {
     /**

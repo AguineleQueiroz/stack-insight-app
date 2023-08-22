@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
+use App\DTO\Supports\CreateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
@@ -25,13 +25,13 @@ class SupportController extends Controller
 
     /**
      * @param Request $request
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     * @return Application
      */
-    public function index(Request $request)
+    public function index(Request $request): Application
     {
         $supports = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 1),
+            totalPerPage: $request->get('per_page', 3),
             filter: $request->filter,
         );
         $filters = [ 'filter' => $request->get('filter', '')];
@@ -39,9 +39,9 @@ class SupportController extends Controller
     }
 
     /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     * @return Application
      */
-    public function create()
+    public function create(): Application
     {
         return view('admin.supports.create');
     }
@@ -51,7 +51,7 @@ class SupportController extends Controller
      * @param StoreUpdateSupport $request
      * @return RedirectResponse
      */
-    public function store(StoreUpdateSupport $request)
+    public function store(StoreUpdateSupport $request): RedirectResponse
     {
         $this->service->new(
             CreateSupportDTO::makeFromRequest($request)
@@ -62,9 +62,9 @@ class SupportController extends Controller
 
     /**
      * @param string|int $id
-     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
+     * @return Application|RedirectResponse
      */
-    public function show(string|int $id)
+    public function show(string|int $id): Application|RedirectResponse
     {
         $support = $this->service->findOne($id);
         if (!$support) {
@@ -77,9 +77,9 @@ class SupportController extends Controller
 
     /**
      * @param string|int $id
-     * @return Application|Factory|View|\Illuminate\Foundation\Application|RedirectResponse
+     * @return Application|RedirectResponse
      */
-    public function edit(string | int $id)
+    public function edit(string | int $id): Application|RedirectResponse
     {
         if(!$support = $this->service->findOne($id) ) {
             return back();
@@ -90,9 +90,9 @@ class SupportController extends Controller
 
     /**
      * @param StoreUpdateSupport $request
-     * @return RedirectResponse
+     * @return Application|RedirectResponse
      */
-    public function update(StoreUpdateSupport $request)
+    public function update(StoreUpdateSupport $request): Application|RedirectResponse
     {
         /** @var Support $support */
         $support = $this->service->update(
@@ -109,7 +109,7 @@ class SupportController extends Controller
      * @param string|int $id
      * @return RedirectResponse
      */
-    public function destroy(string | int $id)
+    public function destroy(string | int $id): RedirectResponse
     {
         $this->service->delete($id);
         return redirect()->route('supports.index');

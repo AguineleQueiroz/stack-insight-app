@@ -15,7 +15,3 @@ Route::put('/supports/{id}', [SupportController::class, 'update'])->name('suppor
 Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact.contact');
 
-Route::get('/test', function () {
-   dd();
-});
-
