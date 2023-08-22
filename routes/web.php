@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Enums\SupportStatus;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\{SiteController};
 use App\Http\Controllers\Admin\{SupportController};
@@ -13,3 +14,8 @@ Route::get('/supports/{id}/edit', [SupportController::class, 'edit'])->name('sup
 Route::put('/supports/{id}', [SupportController::class, 'update'])->name('supports.update');
 Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact.contact');
+
+Route::get('/test', function () {
+   dd();
+});
+

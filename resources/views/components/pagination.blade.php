@@ -1,7 +1,7 @@
 @if (isset($paginator))
     @php
         /*http_build_query($appends) = converssão das informações do array em formato de query http (url)*/
-        $queryParams = (isset($appends) &&  gettype($appends) === 'array') ? '&' . http_build_query($appends) : '';
+        $queryParams = (isset($appends) &&  gettype($appends) === 'array' && $appends['filter']) ? '&' . http_build_query($appends) : '';
     @endphp
     <nav role="navigation" aria-label="Pagination Navigation" class="flex justify-between">
         {{-- Previous Page Link --}}

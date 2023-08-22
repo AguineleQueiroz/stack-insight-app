@@ -7,8 +7,8 @@
     <table>
         <thead>
             <th>Subject</th>
-            <th>Status</th>
             <th>Description</th>
+            <th>Status</th>
             <th></th>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ $support->subject}}</td>
                     <td>{{ $support->content_body}}</td>
-                    <td>{{ $support->status}}</td>
+                    <td>{{ getStatusSupport($support->status) }}</td>
                     <td>
                         <a href="{{ route('supports.show', $support->id)}}">view</a>
                         <a href="{{ route('supports.edit', $support->id)}}">edit</a>
