@@ -25,9 +25,9 @@ class SupportController extends Controller
 
     /**
      * @param Request $request
-     * @return Application
+     * @return view
      */
-    public function index(Request $request): Application
+    public function index(Request $request): view
     {
         $supports = $this->service->paginate(
             page: $request->get('page', 1),
@@ -39,9 +39,9 @@ class SupportController extends Controller
     }
 
     /**
-     * @return Application
+     * @return view
      */
-    public function create(): Application
+    public function create(): view
     {
         return view('admin.supports.create');
     }
@@ -62,9 +62,9 @@ class SupportController extends Controller
 
     /**
      * @param string|int $id
-     * @return Application|RedirectResponse
+     * @return view|RedirectResponse
      */
-    public function show(string|int $id): Application|RedirectResponse
+    public function show(string|int $id): view|RedirectResponse
     {
         $support = $this->service->findOne($id);
         if (!$support) {
@@ -77,9 +77,9 @@ class SupportController extends Controller
 
     /**
      * @param string|int $id
-     * @return Application|RedirectResponse
+     * @return view|RedirectResponse
      */
-    public function edit(string | int $id): Application|RedirectResponse
+    public function edit(string | int $id): view|RedirectResponse
     {
         if(!$support = $this->service->findOne($id) ) {
             return back();

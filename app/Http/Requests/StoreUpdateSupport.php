@@ -23,8 +23,9 @@ class StoreUpdateSupport extends FormRequest
      */
     public function rules(): array
     {
-        return $this->isMethod('PATCH') ? [
-            'subject' => Rule::unique(Support::class, 'subject')->ignore($this->id),
+        /*$this->support == $this->id*/
+        return $this->isMethod('PATCH') || $this->isMethod('PUT') ? [
+            'subject' => Rule::unique(Support::class, 'subject')->ignore($this->support ?? $this->id),
             'content_body' => 'nullable',
         ] : [
             'subject' => 'required|min:3|max:255|unique:supports',
