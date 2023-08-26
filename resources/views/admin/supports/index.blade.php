@@ -12,7 +12,7 @@
             <th></th>
         </thead>
         <tbody>
-            @foreach ($supports->items() as $support)
+            @foreach ($supports->getItems() as $support)
                 <tr>
                     <td>{{ $support->subject}}</td>
                     <td>{{ $support->content_body}}</td>
