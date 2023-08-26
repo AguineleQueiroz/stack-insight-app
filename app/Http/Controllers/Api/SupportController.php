@@ -10,8 +10,8 @@ use App\Http\Resources\SupportResource;
 use App\Services\SupportServices;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SupportController extends Controller
 {
@@ -55,7 +55,7 @@ class SupportController extends Controller
     {
         $support = $this->services->findOne($id);
         if (!$support) {
-            return response()->json(["error" => "Support not found."], Response::HTTP_NOT_FOUND);
+            return response()->json(["error" => "Support not found."], ResponseAlias::HTTP_NOT_FOUND);
         }
         return new SupportResource($support);
     }
@@ -63,12 +63,12 @@ class SupportController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateSupport $request, string $id)
+    public function update(StoreUpdateSupport $request, string $id): JsonResponse | SupportResource
     {
         $request->merge(["id" => $id]);
         $support = $this->services->update( UpdateSupportDTO::makeFromRequest($request));
         if(!$support) {
-            return response()->json(["error" => "Support not found."], Response::HTTP_NOT_FOUND);
+            return response()->json(["error" => "Support not found."], ResponseAlias::HTTP_NOT_FOUND);
         }
         return new SupportResource($support);
     }
@@ -76,12 +76,12 @@ class SupportController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         if (!$this->services->findOne($id)) {
-            return response()->json(["error" => "Support does not exist."], Response::HTTP_NOT_FOUND);
+            return response()->json(["error" => "Support does not exist."], ResponseAlias::HTTP_NOT_FOUND);
         }
         $this->services->delete($id);
-        return response()->json([], Response::HTTP_NO_CONTENT);
+        return response()->json([], ResponseAlias::HTTP_NO_CONTENT);
     }
 }

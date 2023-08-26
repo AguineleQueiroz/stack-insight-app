@@ -7,7 +7,7 @@ interface PaginateInterface
     /**
      * @return array Array de stdClass
      */
-    public function items():array;
+    public function getItems():array;
 
     /**
      * @return int

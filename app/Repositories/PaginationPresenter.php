@@ -17,7 +17,7 @@ class PaginationPresenter implements PaginateInterface
     /**
      * @return array - Array de stdClass
      */
-    public function items(): array
+    public function getItems(): array
     {
         return $this->items;
     }
