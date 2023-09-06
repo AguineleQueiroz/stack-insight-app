@@ -1,5 +1,5 @@
-@extends('layouts/base')
-@section('title') Support {{$support['id']}}@endsection
+@extends('admin.layouts.app')
+@section('title') Support @endsection
 @section('content')
     <h1>Doubt: {{ $support['subject'] }}</h1>
     <h5>Status: {{ $support['status'] }}</h5>

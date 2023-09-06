@@ -1,4 +1,4 @@
-@extends('layouts/base')
+@extends('admin.layouts.app')
 @section('title') Edit Support @endsection
 @section('content')
     <h1>Doubt: {{ $support->id }}</h1>

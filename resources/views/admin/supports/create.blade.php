@@ -1,4 +1,4 @@
-@extends('layouts/base')
+@extends('admin.layouts.app')
 @section('title') New Support @endsection
 @section('content')
     <h1>Register your doubt</h1>
