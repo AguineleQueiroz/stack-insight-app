@@ -7,17 +7,27 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>@yield('title') - {{ config('app.name') }}</title>
         {{-- tailwind css --}}
-        <script src="https://cdn.tailwindcss.com"></script
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
         <header>
-            @include('admin.layouts.partials.header-logged')
+            @include('admin.supports.partials.header-logged')
         </header>
         <main class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8">
             @yield('content')
         </main>
-        <footer class="h-25 px-4 py-2 bg-slate-300 absolute inset-x-0 bottom-0">
-            <p class="text-slate-600 text-sm text-center">Copyright 2023 - Aguinele Queiroz</p>
-        </footer>
+        <script>
+            const modalCreate = document.querySelector('#create-form');
+            const modalUpdate = document.querySelector('#edit-form');
+            const activateBtnModal = document.querySelector('.showModal');
+            const activateBtnModalUpdate = document.querySelector('.showEdit');
+            activateBtnModal.addEventListener('click', function () {
+                modalCreate.classList.remove('hidden');
+            });
+
+            activateBtnModalUpdate.addEventListener('click', function () {
+                modalUpdate.classList.remove('hidden');
+            });
+        </script>
     </body>
 </html>

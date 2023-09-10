@@ -46,7 +46,6 @@ class SupportController extends Controller
         return view('admin.supports.create');
     }
 
-
     /**
      * @param StoreUpdateSupport $request
      * @return RedirectResponse
@@ -84,7 +83,7 @@ class SupportController extends Controller
         if(!$support = $this->service->findOne($id) ) {
             return back();
         }
-        return view('admin.supports.edit', compact('support'));
+        return view('admin.supports.partials.form-edit', compact('support'));
     }
 
 
