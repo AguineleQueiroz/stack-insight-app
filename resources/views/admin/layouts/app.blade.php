@@ -8,6 +8,8 @@
         <title>@yield('title') - {{ config('app.name') }}</title>
         {{-- tailwind css --}}
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
         <header>
@@ -16,18 +18,6 @@
         <main class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8">
             @yield('content')
         </main>
-        <script>
-            const modalCreate = document.querySelector('#create-form');
-            const modalUpdate = document.querySelector('#edit-form');
-            const activateBtnModal = document.querySelector('.showModal');
-            const activateBtnModalUpdate = document.querySelector('.showEdit');
-            activateBtnModal.addEventListener('click', function () {
-                modalCreate.classList.remove('hidden');
-            });
-
-            activateBtnModalUpdate.addEventListener('click', function () {
-                modalUpdate.classList.remove('hidden');
-            });
-        </script>
+        @include('admin.layouts.scripts')
     </body>
 </html>

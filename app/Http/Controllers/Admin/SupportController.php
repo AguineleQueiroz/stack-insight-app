@@ -11,6 +11,7 @@ use App\Services\SupportServices;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -112,5 +113,15 @@ class SupportController extends Controller
     {
         $this->service->delete($id);
         return redirect()->route('supports.index');
+    }
+
+    /**
+     * @param string|int $id
+     * @return RedirectResponse|JsonResponse
+     */
+    public function findSupport(string|int $id)
+    {
+        $support = Support::find($id);
+        return response()->json($support);
     }
 }

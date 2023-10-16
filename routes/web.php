@@ -13,5 +13,4 @@ Route::get('/supports/{id}',[SupportController::class, 'show'])->name('supports.
 Route::get('/supports/{id}/edit', [SupportController::class, 'edit'])->name('supports.edit');
 Route::put('/supports/{id}', [SupportController::class, 'update'])->name('supports.update');
 Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
-Route::get('/contact', [SiteController::class, 'contact'])->name('contact.contact');
-
+Route::get('/findSupport/{id}', [SupportController::class, 'findSupport']);
