@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 use stdClass;
 
 class PaginationPresenter implements PaginateInterface
@@ -19,7 +20,11 @@ class PaginationPresenter implements PaginateInterface
      */
     public function getItems(): array
     {
-        return $this->items;
+        $supports = $this->items;
+        foreach ($supports as $support) {
+            $support->content_body = Str::limit($support->content_body, 38, '...');
+        }
+        return $supports;
     }
 
     /**

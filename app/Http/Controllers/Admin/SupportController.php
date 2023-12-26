@@ -56,7 +56,7 @@ class SupportController extends Controller
         $this->service->new(
             CreateSupportDTO::makeFromRequest($request)
         );
-        return redirect()->route('supports.index')->with('message', 'Stored success.');
+        return redirect()->route('supports.index')->with('message', 'Support created with successfully.');
     }
 
 
@@ -101,7 +101,7 @@ class SupportController extends Controller
         if(!$support) {
             return back();
         }
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('message', 'Support updated successfully.');
     }
 
 
@@ -112,7 +112,7 @@ class SupportController extends Controller
     public function destroy(string | int $id): RedirectResponse
     {
         $this->service->delete($id);
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('message', 'Support deleted successfully.');
     }
 
     /**

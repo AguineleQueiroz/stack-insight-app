@@ -10,8 +10,10 @@
         @foreach ($supports->getItems() as $support)
             <tr class="h-12 odd:bg-slate-50 even:bg-white" id="{{$support->id}}">
                 <td class="px-4">{{ $support->subject}}</td>
-                <td class="text-slate-500 px-4">{{ $support->content_body}}</td>
-                <td class="px-4">{{ getStatusSupport($support->status) }}</td>
+                <td class="text-slate-500 px-4">{{ $support->content_body }}</td>
+                <td class="px-4">
+                    <x-status-support :status="$support->status"></x-status-support>
+                </td>
                 <td class="flex items-center justify-end h-12 px-4">
 
                     <a href="javascript:void(0)" onclick="updateSupport({{$support->id}})" class="showEdit" data-modal-target="modal-form" data-modal-toggle="modal-form" data-bs-target="{{$support->id}}">
