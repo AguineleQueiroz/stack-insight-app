@@ -20,4 +20,18 @@
             {{ old('content_body')}}
         </textarea>
     </label>
+    <div class="flex gap-x-4">
+        <label for="status_support" class="flex gap-2 align-items-center">
+            <input type="radio" name="status_support" id="Active" value="Active" style="margin-top: 1px;">
+            <span class="text-sm font-medium">Active</span>
+        </label>
+        <label for="status_support" class="flex gap-2 align-items-center">
+            <input type="radio" name="status_support" id="pendent" value="Pendent" style="margin-top: 1px;">
+            <span class="text-sm font-medium">Pendent</span>
+        </label>
+        <label for="status_support" class="flex gap-2 align-items-center">
+            <input type="radio" name="status_support" id="closed" value="Closed" style="margin-top: 1px;">
+            <span class="text-sm font-medium">Closed</span>
+        </label>
+    </div>
 </div>
