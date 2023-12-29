@@ -21,16 +21,16 @@
         </textarea>
     </label>
     <div class="flex gap-x-4">
-        <label for="status_support" class="flex gap-2 align-items-center">
-            <input type="radio" name="status_support" id="Active" value="Active" style="margin-top: 1px;">
+        <label for="status_support" class="flex gap-x-2">
+            <input type="radio" name="status_support" id="Active" value="Active" {{ isset($support->status_support) ? ($support->status_support == 'Active' ? 'checked' : '') : 'checked' }}>
             <span class="text-sm font-medium">Active</span>
         </label>
-        <label for="status_support" class="flex gap-2 align-items-center">
-            <input type="radio" name="status_support" id="pendent" value="Pendent" style="margin-top: 1px;">
+        <label for="status_support" class="flex gap-x-2">
+            <input type="radio" name="status_support" id="pendent" value="Pendent" {{ isset($support->status_support) && $support->status_support == 'Pendent' ? 'checked' : '' }}>
             <span class="text-sm font-medium">Pendent</span>
         </label>
-        <label for="status_support" class="flex gap-2 align-items-center">
-            <input type="radio" name="status_support" id="closed" value="Closed" style="margin-top: 1px;">
+        <label for="status_support" class="flex gap-x-2">
+            <input type="radio" name="status_support" id="closed" value="Closed" {{ isset($support->status_support) && $support->status_support == 'Closed' ? 'checked' : '' }}>
             <span class="text-sm font-medium">Closed</span>
         </label>
     </div>

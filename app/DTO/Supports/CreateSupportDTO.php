@@ -23,6 +23,7 @@ class CreateSupportDTO
      * @return self
      */
     public static function makeFromRequest(StoreUpdateSupport $request): self {
+        $status = SupportStatus::fromValue($request["status_support"]);
         return new self(
             $request['subject'],
             $request['content_body'],

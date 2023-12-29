@@ -13,11 +13,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('supports', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->index();
             $table->string('subject');
             $table->enum('status', array_column(SupportStatus::cases(), 'name'));
             $table->text('content_body');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
