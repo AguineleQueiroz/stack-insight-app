@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+    <x-messages/>
     <div class="border rounded-sm xl:p-8 p-8 w-full">
         <div class="flex max-sm:flex-col justify-between mb-6">
             <div>

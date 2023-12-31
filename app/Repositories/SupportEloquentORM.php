@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\DTO\{Supports\CreateSupportDTO, Supports\UpdateSupportDTO};
 use App\Models\Support;
+use App\Repositories\Contracts\PaginateInterface;
+use App\Repositories\Contracts\SupportRepositoryInterface;
 use stdClass;
 
 class SupportEloquentORM implements SupportRepositoryInterface

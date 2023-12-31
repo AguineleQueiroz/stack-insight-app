@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+use App\Repositories\Contracts\PaginateInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use stdClass;
