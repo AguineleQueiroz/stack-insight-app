@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthApiController;
 use App\Http\Controllers\ProfileController;
-use App\Services\Enums\SupportStatus;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Site\{SiteController};
 use App\Http\Controllers\Admin\{SupportController, ReplySupportController};
 
 Route::get('/', function () {
@@ -25,10 +24,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/supports', [SupportController::class, 'index'])->name('supports.index');
     Route::get('/supports/create', [SupportController::class, 'create'])->name('supports.create');
     Route::post('/supports', [SupportController::class, 'store'])->name('supports.store');
-    Route::get('/supports/{id}/edit', [SupportController::class, 'edit'])->name('supports.edit');
     Route::put('/supports/{id}', [SupportController::class, 'update'])->name('supports.update');
+    Route::get('/supports/{id}/edit', [SupportController::class, 'edit'])->name('supports.edit');
     Route::delete('/supports/{id}', [SupportController::class, 'destroy'])->name('supports.destroy');
     Route::get('/findSupport/{id}', [SupportController::class, 'findSupport']);
+
+    Route::get('/me', [AuthApiController::class, 'me']);
 });
 
 require __DIR__.'/auth.php';

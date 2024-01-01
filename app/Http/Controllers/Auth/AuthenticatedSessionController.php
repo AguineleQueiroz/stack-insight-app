@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Api\Auth\AuthApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -28,7 +29,8 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        $user_data = (new AuthApiController)->loggedUser($request)->getData();
+        session()->put('user', $user_data->User_logged);
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

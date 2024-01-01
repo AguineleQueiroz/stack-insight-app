@@ -12,7 +12,6 @@
             url: '/findSupport/' + id,
             type: 'GET',
             success: function (support) {
-                console.log(support)
                 $('#support-id').val(support.id);
                 $('#subject').val(support.subject);
                 $('#content_body').val(support.content_body);
@@ -26,20 +25,56 @@
         let id = $('#support-id').val();
         let subject = $('#subject').val();
         let content_body = $('#content_body').val();
+        // const urlWithParams = `/supports/${id}?subject=${subject}&content_body=${content_body}`;
+        //
+        // axios.put(urlWithParams).then(response => {
+        //     console.log(response.data);
+        //     modalUpdate.classList.add('hidden');
+        //     location.href = '/supports';
+        // }).catch(error => {
+        //     console.log(window.location.href)
+        //     console.error('Erro na requisição PUT:', error);
+        // });
 
-        $.ajax({
-            url: '/api/v1/supports/' + id,
-            type: "PUT",
-            data: {
-                subject: subject,
-                content_body: content_body
-            },
-            success:function (response) {
-                console.log(response)
-                modalUpdate.classList.add('hidden')
-                location.href = '/supports'
+        $.get('/me').done(function(data){
+            authenticateAndEditSupport(
+                {
+                    email: data.User_logged.email,
+                    password: data.Authentication,
+                    device_name: 'application'
+                }
+            );
+            function authenticateAndEditSupport(user) {
+                $.ajax({
+                    url: 'api/v1/auth',
+                    type: "POST",
+                    data: {
+                        email: user.email,
+                        password: user.password,
+                        device_name: 'modal'
+                    },
+                    success: function (response) {
+                        $.ajax({
+                            url: 'api/v1/supports/' + id,
+                            type: "PUT",
+                            data: {
+                                subject: subject,
+                                content_body: content_body
+                            },
+                            headers: {
+                                'Authorization': 'Bearer ' + response.token
+                            },
+                            success: function (response) {
+                                console.log(response);
+                                modalUpdate.classList.add('hidden');
+                                location.href = '/supports';
+                            }
+                        });
+                    }
+                });
             }
-        })
-    })
+        });
+    });
+
 
 </script>
