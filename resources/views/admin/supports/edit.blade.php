@@ -1,7 +1,9 @@
-@extends('admin.layouts.app')
-@section('title')
-    Edit Support
-@endsection
+@extends('layouts.app')
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Edit Suport') }}
+    </h2>
+</x-slot>
 @section('content')
     <x-alert/>
     <form action="{{ route('supports.update', $support->id ) }}" method="POST">

@@ -1,5 +1,5 @@
 @if($supports->getItems())
-    <table class="my-8 p-8 min-w-[100%]">
+    <table class="my-8 p-8 w-full">
         <thead class="text-left border-b h-14">
             <th class="text-blue-900  px-4">Title</th>
             <th class="text-blue-900  px-4">Content</th>

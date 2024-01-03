@@ -1,11 +1,14 @@
-@extends('admin.layouts.app')
-@section('title')
-    Support List
-@endsection
+@extends('layouts.app')
+
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Suport') }}
+    </h2>
+</x-slot>
 
 @section('content')
     <x-messages/>
-    <div class="border rounded-sm xl:p-8 p-8 w-full">
+    <div class="border rounded-sm xl:p-8 p-8 w-full bg-white">
         <div class="flex max-sm:flex-col justify-between mb-6">
             <div>
                 <h4 class="font-medium mb-2">Questions</h4>
@@ -24,7 +27,9 @@
                 </button>
             </div>
         </div>
-        @include('admin.supports.partials.content')
+        <div class="">
+            @include('admin.supports.partials.content')
+        </div>
         @include('admin.supports.partials.form-edit')
         @include('admin.supports.partials.form-create')
     </div>

@@ -1,5 +1,9 @@
-@extends('admin.layouts.app')
-@section('title') Support @endsection
+@extends('layouts.app')
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Suport') }}
+    </h2>
+</x-slot>
 @section('content')
     <div class="border rounded-sm xl:p-8 p-8 w-full">
         <div class="flex max-sm:flex-col justify-between">

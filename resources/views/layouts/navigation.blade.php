@@ -2,19 +2,42 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex w-full">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('supports.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('supports.index')" :active="request()->routeIs('supports.index')">
+                        {{ __('StackInsight') }}
                     </x-nav-link>
+                </div>
+                <!-- Search input -->
+                <div class="flex mx-auto lg:mx-0 lg:ml-auto">
+                    <form action="{{ route('supports.index') }}" method="get" class="self-center">
+                        <div class="relative mx-auto text-gray-600">
+                            <label>
+                                <span class="sr-only">Search</span>
+                                <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:border-indigo-400 focus:ring-indigo-400 focus:ring-0 sm:text-sm"
+                                       type="text"
+                                       name="filter"
+                                       placeholder="Search"
+                                       value="{{ $filters['filter'] ?? '' }}"
+                                >
+                            </label>
+                            <button type="submit" class="absolute right-0 top-[20%] mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d2d2d2" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
 
@@ -67,8 +90,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('supports.index')" :active="request()->routeIs('supports.index')">
+                {{ __('StackInsight') }}
             </x-responsive-nav-link>
         </div>
 

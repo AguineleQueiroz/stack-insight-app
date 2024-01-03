@@ -1,7 +1,9 @@
-@extends('admin.layouts.app')
-@section('title')
-    New Support
-@endsection
+@extends('layouts.app')
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('New Suport') }}
+    </h2>
+</x-slot>
 @section('content')
     <x-alert/>
     <form action="{{ route('supports.store') }}" method="POST">
