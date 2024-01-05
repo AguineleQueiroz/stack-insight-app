@@ -20,8 +20,7 @@ class ReplySupportRepository implements ReplyRepositoryInterface
      * @return array
      */
     public function getRepliesBySupport(string $supportId):array {
-//        $replies = ReplySupport::findRepliesSupport($supportId);
-        $replies = $this->model->findRepliesSupport($supportId);
+        $replies = $this->model->with(['user', 'support'])->where('support_id', $supportId)->get();
         return $replies->toArray();
     }
 
@@ -37,5 +36,14 @@ class ReplySupportRepository implements ReplyRepositoryInterface
             'user_id' => Auth::user()->id
         ]);
         return (object) $new_reply->toArray();
+    }
+
+    /**
+     * @param string $id
+     * @return bool
+     */
+    public function delete(string $id): bool
+    {
+        return (bool) $this->model->find($id)->delete($id);
     }
 }

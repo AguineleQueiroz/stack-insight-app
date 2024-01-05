@@ -24,4 +24,13 @@ class ReplySupportService
     public function create(CreateReplyDTO $dto):stdClass {
         return $this->repository->create($dto);
     }
+
+    /**
+     * @param string $id
+     * @return bool
+     */
+    public function delete(string $id):bool
+    {
+        return $this->repository->delete($id);
+    }
 }

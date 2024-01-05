@@ -18,5 +18,11 @@ interface ReplyRepositoryInterface
      * @return stdClass
      */
     public function create(CreateReplyDTO $dto): stdClass;
+
+    /**
+     * @param string $id
+     * @return bool
+     */
+    public function delete(string $id): bool;
 }
 

@@ -6,6 +6,7 @@ use App\DTO\Replies\CreateReplyDTO;
 use App\Http\Controllers\Controller;
 use App\Services\ReplySupportService;
 use App\Services\SupportServices;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ class ReplySupportController extends Controller
             return back();
         }
         $replies = $this->replyService->getRepliesBySupport($id);
+//        dd($replies);
         return view('admin.supports.replies.replies', compact('support', 'replies'));
     }
 
@@ -35,5 +37,16 @@ class ReplySupportController extends Controller
             CreateReplyDTO::makeReplyFromRequest($request)
         );
         return redirect()->route('replies.replies', $request->support_id)->with('message', 'reply registered successfully.');
+    }
+
+    /**
+     * @param string $supportId
+     * @param string $id
+     * @return RedirectResponse
+     */
+    public function destroy(string $supportId, string $id): RedirectResponse
+    {
+        $this->replyService->delete($id);
+        return redirect()->route('replies.replies', $supportId)->with('message', 'reply deleted successfully.');
     }
 }
