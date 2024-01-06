@@ -5,7 +5,7 @@
     </h2>
 </x-slot>
 @section('content')
-    {{--  flesh messages  --}}
+    {{--  flash messages  --}}
     <x-messages></x-messages>
     <div class="border rounded-sm xl:p-8 p-8 w-full bg-white">
         <div class="flex max-sm:flex-col justify-between">
@@ -27,14 +27,15 @@
                     @endif
                 </h5>
             </div>
-
-            <form action="{{ route('supports.destroy', $support->id)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="text-red-600 relative inline-flex items-center px-8 py-2 h-9 text-sm font-medium leading-5 rounded-sm focus:outline-none focus:ring ring-red-300 focus:border-red-300  active:bg-red-700 transition ease-in-out duration-150" type="submit">
-                    Delete
-                </button>
-            </form>
+            @can('owner', $support->user_id)
+                <form action="{{ route('supports.destroy', $support->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="text-red-600 relative inline-flex items-center px-8 py-2 h-9 text-sm font-medium leading-5 rounded-sm focus:outline-none focus:ring ring-red-300 focus:border-red-300  active:bg-red-700 transition ease-in-out duration-150" type="submit">
+                        Delete
+                    </button>
+                </form>
+            @endcan
         </div>
 
         <div class="pt-5">
@@ -63,14 +64,15 @@
                             </div>
                         </div>
                     </div>
-
-                    <form action="{{ route('replies.destroy', [$support->id, $reply['id']])}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="text-red-600 relative inline-flex items-center px-8 py-2 h-9 text-sm font-medium leading-5 rounded-sm focus:outline-none focus:ring ring-red-300 focus:border-red-300  active:bg-red-700 transition ease-in-out duration-150" type="submit">
-                            Delete
-                        </button>
-                    </form>
+                    @can('owner', $reply['user_id'])
+                        <form action="{{ route('replies.destroy', [$support->id, $reply['id']])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-red-600 relative inline-flex items-center px-8 py-2 h-9 text-sm font-medium leading-5 rounded-sm focus:outline-none focus:ring ring-red-300 focus:border-red-300  active:bg-red-700 transition ease-in-out duration-150" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    @endcan
                 </div>
 
                 <div class="pt-5">

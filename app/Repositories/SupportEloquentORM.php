@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\Gate;
 use App\DTO\{Supports\CreateSupportDTO, Supports\UpdateSupportDTO};
 use App\Models\Support;
 use App\Repositories\Contracts\PaginateInterface;
@@ -83,6 +84,9 @@ class SupportEloquentORM implements SupportRepositoryInterface
         if (!$support){
             return null;
         }
+        if(Gate::denies('owner', $support->user->id)) {
+            abort(403, 'Unauthorized operation.');
+        }
         $supportDataArray = (array) $dto;
         $support->update($supportDataArray);
         /* transform in stdClass and return */
@@ -96,6 +100,10 @@ class SupportEloquentORM implements SupportRepositoryInterface
      */
     public function delete(int|string $id): void
     {
-        $this->modelSupport->findOrFail($id)->delete();
+        $support = $this->modelSupport->findOrFail($id);
+        if(Gate::denies('owner', $support->user->id)) {
+            abort(403, 'Unauthorized operation.');
+        }
+        $support->delete();
     }
 }

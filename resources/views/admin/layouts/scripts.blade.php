@@ -1,9 +1,9 @@
 <script>
-    const modalCreate = document.querySelector('#create-form');
-    const modalUpdate = document.querySelector('#edit-form');
-    const activateBtnModal = document.querySelector('.showModal');
+    const modalCreate = document?.querySelector('#create-form');
+    const modalUpdate = document?.querySelector('#edit-form');
+    const activateBtnModal = document?.querySelector('.showModal');
 
-    activateBtnModal.addEventListener('click', function () {
+    activateBtnModal?.addEventListener('click', function () {
         modalCreate.classList.remove('hidden');
     });
 
@@ -25,16 +25,6 @@
         let id = $('#support-id').val();
         let subject = $('#subject').val();
         let content_body = $('#content_body').val();
-        // const urlWithParams = `/supports/${id}?subject=${subject}&content_body=${content_body}`;
-        //
-        // axios.put(urlWithParams).then(response => {
-        //     console.log(response.data);
-        //     modalUpdate.classList.add('hidden');
-        //     location.href = '/supports';
-        // }).catch(error => {
-        //     console.log(window.location.href)
-        //     console.error('Erro na requisição PUT:', error);
-        // });
 
         $.get('/me').done(function(data){
             authenticateAndEditSupport(

@@ -106,20 +106,20 @@ class SupportController extends Controller
 
 
     /**
-     * @param string|int $id
+     * @param string $id
      * @return RedirectResponse
      */
-    public function destroy(string | int $id): RedirectResponse
+    public function destroy(string $id): RedirectResponse
     {
         $this->service->delete($id);
         return redirect()->route('supports.index')->with('message', 'Support deleted successfully.');
     }
 
     /**
-     * @param string|int $id
-     * @return RedirectResponse|JsonResponse
+     * @param string $id
+     * @return JsonResponse
      */
-    public function findSupport(string|int $id)
+    public function findSupport(string $id): JsonResponse
     {
         $support = Support::find($id);
         return response()->json($support);

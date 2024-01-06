@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Gate;
 use App\DTO\{Supports\CreateSupportDTO, Supports\UpdateSupportDTO};
 use App\Repositories\Contracts\PaginateInterface;
 use App\Repositories\Contracts\SupportRepositoryInterface;
@@ -58,11 +59,12 @@ class SupportServices
     public function update(UpdateSupportDTO $dto): stdClass | null {
         return  $this->repository->update($dto);
     }
+
     /**
-     * @param string|int $id
+     * @param string $id
      * @return void
      */
-    public function delete(string | int $id): void {
+    public function delete(string $id): void {
         $this->repository->delete($id);
     }
 }
