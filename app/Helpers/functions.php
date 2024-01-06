@@ -7,3 +7,8 @@ if(!function_exists(function: 'getStatusSupport')) {
         return SupportStatus::fromValue($status);
     }
 }
+if(!function_exists(function: 'getQuantityReplies')) {
+    function getQuantityReplies(stdClass $support): int {
+        return max(count($support->total_replies), 0);
+    }
+}

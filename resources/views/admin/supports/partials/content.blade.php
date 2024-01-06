@@ -3,6 +3,7 @@
         <thead class="text-left border-b h-14">
             <th class="text-blue-900  px-4">Title</th>
             <th class="text-blue-900  px-4">Content</th>
+            <th class="text-blue-900  px-4">Replies</th>
             <th class="text-blue-900  px-4">Status</th>
             <th class="text-blue-900  px-4"></th>
         </thead>
@@ -11,6 +12,10 @@
             <tr class="h-12 odd:bg-slate-50 even:bg-white" id="{{$support->id}}">
                 <td class="px-4">{{ $support->subject}}</td>
                 <td class="text-slate-500 px-4">{{ $support->content_body }}</td>
+{{--                <td class="text-slate-500 px-4">{{ count($support->total_replies) }}</td>--}}
+                <td class="text-slate-500 px-4">
+                    <x-replies-support>{{__(getQuantityReplies($support))}}</x-replies-support>
+                </td>
                 <td class="px-4">
                     <x-status-support :status="$support->status"></x-status-support>
                 </td>

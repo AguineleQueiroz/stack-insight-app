@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Repositories;
+use App\Http\Controllers\Admin\ReplySupportController;
+use App\Models\ReplySupport;
 use App\Repositories\Contracts\PaginateInterface;
+use App\Repositories\Contracts\ReplyRepositoryInterface;
+use App\Repositories\Eloquent\ReplySupportRepository;
+use App\Services\ReplySupportService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use stdClass;
@@ -22,8 +27,12 @@ class PaginationPresenter implements PaginateInterface
     public function getItems(): array
     {
         $supports = $this->items;
-        foreach ($supports as $support) {
+        foreach ($supports as &$support) {
+            $reply_model = new ReplySupport();
             $support->content_body = Str::limit($support->content_body, 38, '...');
+            $support = (array)$support;
+            $support['total_replies'] = (new ReplySupportRepository($reply_model))->getRepliesBySupport($support['id']);
+            $support = (object)$support;
         }
         return $supports;
     }

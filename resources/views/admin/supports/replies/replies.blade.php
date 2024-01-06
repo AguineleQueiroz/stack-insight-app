@@ -49,8 +49,8 @@
                 <div class="flex max-sm:flex-col justify-between">
 
                     <div class=" flex items-center gap-2">
-                        <div class="relative w-10 h-10 overflow-hidden bg-gray-300 rounded-full">
-                            <svg class="absolute w-12 h-12 text-slate-100 -left-1" fill="currentColor" viewBox="0 0 20 20"
+                        <div class="relative w-10 h-10 overflow-hidden bg-indigo-300 rounded-full">
+                            <svg class="absolute w-12 h-12 text-slate-100 -left-1" fill="#ffffff" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
                                 </path>
@@ -79,7 +79,9 @@
             </div>
         </div>
     @empty
-        <p> No replies yet. </p>
+        <div class="bg-amber-100 border border-[#fbbf24] px-2 py-1 text-center mt-2">
+            <p class="text-amber-600">No one has answered your question yet...</p>
+        </div>
     @endforelse
     {{--replies input area--}}
     <div class="ps-6 py-4">

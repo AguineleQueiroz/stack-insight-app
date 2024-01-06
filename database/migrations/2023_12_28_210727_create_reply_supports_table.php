@@ -16,8 +16,8 @@ return new class extends Migration
             $table->uuid('user_id')->index();
             $table->uuid('support_id')->index();
             $table->string('content');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('support_id')->references('id')->on('supports');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('support_id')->references('id')->on('supports')->onDelete('cascade');
             $table->timestamps();
         });
     }

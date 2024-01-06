@@ -12,7 +12,7 @@
         <div class="flex max-sm:flex-col justify-between mb-6">
             <div>
                 <h4 class="font-medium mb-2">Questions</h4>
-                <p class="text-slate-500">A list of all the supports in your account including their subject,
+                <p class="text-slate-500">A list of all the supports, including their subject,
                     description and status.</p>
                 <p class="text-slate-500 mt-2">Supports total: {{ $supports->total() }}</p>
             </div>
