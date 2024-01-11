@@ -39,8 +39,4 @@ class ReplySupport extends Model
     public function support():BelongsTo {
         return $this->BelongsTo(Support::class);
     }
-
-    public function findRepliesSupport(string $id) {
-        return self::where('support_id', $id)->get();
-    }
 }

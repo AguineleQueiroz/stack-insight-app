@@ -31,11 +31,12 @@ class ReplySupportRepository implements ReplyRepositoryInterface
      * @throws \Exception
      */
     public function create(CreateReplyDTO $dto):stdClass {
-        $new_reply = $this->model->with('user')->create([
+        $new_reply = $this->model->create([
             'content' => $dto->content_reply,
             'support_id' => $dto->supportId,
             'user_id' => Auth::user()->id
         ]);
+        $new_reply = $new_reply->with('user')->first();
         return (object) $new_reply->toArray();
     }
 

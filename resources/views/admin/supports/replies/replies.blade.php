@@ -93,7 +93,7 @@
             <textarea
                 rows="2"
                 name="content"
-                class="w-full resize-none rounded-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                class="w-full resize-none rounded-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 placeholder="Write your reply" >
             </textarea>
             <button type="submit" class="hover:shadow-form rounded-sm bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">

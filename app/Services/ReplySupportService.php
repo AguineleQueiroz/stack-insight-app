@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\Replies\CreateReplyDTO;
+use App\Events\NewReplySupport;
 use App\Repositories\Contracts\ReplyRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Gate;
@@ -23,7 +24,9 @@ class ReplySupportService
      * @throws Exception
      */
     public function create(CreateReplyDTO $dto):stdClass {
-        return $this->repository->create($dto);
+        $new_reply = $this->repository->create($dto);
+        NewReplySupport::dispatch($new_reply);
+        return $new_reply;
     }
 
     /**
