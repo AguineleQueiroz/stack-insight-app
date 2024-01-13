@@ -18,7 +18,7 @@ class NewReplySupportMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct( protected stdClass $support ) {}
+    public function __construct( protected stdClass $reply ) {}
 
     /**
      * Get the message envelope.
@@ -26,7 +26,7 @@ class NewReplySupportMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Reply Support Mail',
+            subject: 'New Reply Support',
         );
     }
 
@@ -38,8 +38,7 @@ class NewReplySupportMail extends Mailable implements ShouldQueue
         return new Content(
             markdown: 'emails.supports.replied',
             with: [
-                'support' => $this->support,
-                'who' =>  $this->support->user['name'],
+                'reply' => $this->reply,
             ]
         );
     }

@@ -32,7 +32,7 @@ class SupportController extends Controller
     {
         $supports = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 3),
+            totalPerPage: $request->get('per_page', 15),
             filter: $request->filter,
         );
         $filters = [ 'filter' => $request->get('filter', '')];

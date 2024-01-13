@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
-
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -46,5 +46,15 @@ class User extends Authenticatable
 
     public function getSupports():HasMany {
         return $this->hasMany(Support::class);
+    }
+
+    public static function getUserEmail(string $id) {
+        $user_id = Support::select('user_id')->where('id', $id)->first();
+        $user_id = $user_id->toArray();
+        if($user_id) {
+            $user = (self::where('id', $user_id)->first())->toArray();
+            return $user ?? null;
+        }
+        return null;
     }
 }

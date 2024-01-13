@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\NewReplySupport;
 use App\Mail\NewReplySupportMail;
+use App\Models\Support;
 use Illuminate\Support\Facades\Mail;
 
 class SendMailWhenSupportReplied
@@ -18,7 +19,7 @@ class SendMailWhenSupportReplied
      */
     public function handle(NewReplySupport $event): void
     {
-        $support = $event->getSupport();
-        Mail::to($support->user['email'])->send(new NewReplySupportMail($support));
+        $reply = $event->getReply();
+        Mail::to($reply->owner_support_email['email'])->send(new NewReplySupportMail($reply));
     }
 }

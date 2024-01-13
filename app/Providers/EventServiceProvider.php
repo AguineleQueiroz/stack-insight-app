@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\NewReplySupport;
+use App\Listeners\ChangeStatusSupport;
 use App\Listeners\SendMailWhenSupportReplied;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +23,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewReplySupport::class => [
             SendMailWhenSupportReplied::class,
+            ChangeStatusSupport::class,
         ]
     ];
 

@@ -14,6 +14,7 @@ class ReplySupport extends Model
     use HasFactory, HasUuids;
 
     protected $table = 'replies_support';
+    protected $with = 'user';
     protected $fillable = [
         'user_id',
         'support_id',

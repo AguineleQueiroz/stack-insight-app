@@ -22,7 +22,6 @@ class ReplySupportController extends Controller
             return back();
         }
         $replies = $this->replyService->getRepliesBySupport($id);
-//        dd($replies);
         return view('admin.supports.replies.replies', compact('support', 'replies'));
     }
 

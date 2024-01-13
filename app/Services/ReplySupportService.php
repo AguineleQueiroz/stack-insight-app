@@ -6,7 +6,6 @@ use App\DTO\Replies\CreateReplyDTO;
 use App\Events\NewReplySupport;
 use App\Repositories\Contracts\ReplyRepositoryInterface;
 use Exception;
-use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class ReplySupportService

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\ReplySupport;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -18,19 +19,19 @@ class NewReplySupport
     /**
      * Create a new event instance.
      */
-    public function __construct( protected stdClass $support) {}
+    public function __construct( protected stdClass $reply) {}
 
     /**
      * @return stdClass
      */
-    public function getSupport(): stdClass {
-        return $this->support;
+    public function getReply(): stdClass {
+        return $this->reply;
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return array<int, Channel>
      */
     public function broadcastOn(): array
     {

@@ -4,7 +4,9 @@ namespace App\Repositories\Eloquent;
 
 use App\DTO\Replies\CreateReplyDTO;
 use App\Models\ReplySupport;
+use App\Models\User;
 use App\Repositories\Contracts\ReplyRepositoryInterface;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use stdClass;
@@ -21,22 +23,24 @@ class ReplySupportRepository implements ReplyRepositoryInterface
      * @return array
      */
     public function getRepliesBySupport(string $supportId):array {
-        $replies = $this->model->with(['user', 'support'])->where('support_id', $supportId)->get();
+        $replies = $this->model->where('support_id', $supportId)->get();
         return $replies->toArray();
     }
 
     /**
      * @param CreateReplyDTO $dto
      * @return stdClass
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(CreateReplyDTO $dto):stdClass {
+        $owner_reply = Auth::user();
         $new_reply = $this->model->create([
-            'content' => $dto->content_reply,
+            'user_id' => $owner_reply->id,
             'support_id' => $dto->supportId,
-            'user_id' => Auth::user()->id
+            'content' => $dto->content_reply,
         ]);
-        $new_reply = $new_reply->with('user')->first();
+        $new_reply['user'] = $owner_reply->toArray();
+        $new_reply['owner_support_email'] = User::getUserEmail($dto->supportId);
         return (object) $new_reply->toArray();
     }
 

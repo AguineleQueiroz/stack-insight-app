@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Services\Enums\SupportStatus;
 use Illuminate\Support\Facades\Gate;
 use App\DTO\{Supports\CreateSupportDTO, Supports\UpdateSupportDTO};
 use App\Models\Support;
@@ -93,6 +94,14 @@ class SupportEloquentORM implements SupportRepositoryInterface
         return (object)$support->toArray();
     }
 
+    /**
+     * @param string $id
+     * @param SupportStatus $status
+     * @return void
+     */
+    public function updateStatus(string $id, SupportStatus $status): void {
+        $this->modelSupport->where('id', $id)->update([ 'status' => $status ]);
+    }
 
     /**
      * @param int|string $id

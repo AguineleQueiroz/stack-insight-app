@@ -9,6 +9,6 @@ if(!function_exists(function: 'getStatusSupport')) {
 }
 if(!function_exists(function: 'getQuantityReplies')) {
     function getQuantityReplies(stdClass $support): int {
-        return max(count($support->total_replies), 0);
+        return max(count($support->replies), 0);
     }
 }
