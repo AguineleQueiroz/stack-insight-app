@@ -15,7 +15,7 @@ class CreateReplyDTO
 
         return new self(
             $request->support_id,
-            $request->content
+            $request->content_reply
         );
     }
 }

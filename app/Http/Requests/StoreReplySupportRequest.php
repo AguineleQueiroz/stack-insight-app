@@ -24,11 +24,12 @@ class StoreReplySupportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|min:3|max:10000',
+            'content_reply' => 'required|min:3|max:10000',
 //            'support_id' => 'required|exists:supports,id'
-              'support_id' => [
-                  Rule::exists('supports', 'id'),
-              ],
+            'support_id' => [
+              'required',
+              Rule::exists('supports', 'id'),
+            ],
         ];
     }
 }
