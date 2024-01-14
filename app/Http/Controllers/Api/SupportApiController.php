@@ -12,9 +12,10 @@ use App\Services\SupportServices;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class SupportController extends Controller
+class SupportApiController extends Controller
 {
     public function __construct(protected SupportServices $services){}
 
@@ -34,10 +35,10 @@ class SupportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateSupport $request): SupportResource
+    public function store(StoreUpdateSupport $request): JsonResponse
     {
         $support = $this->services->new(CreateSupportDTO::makeFromRequest($request));
-        return new SupportResource($support);
+        return (new SupportResource($support))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**

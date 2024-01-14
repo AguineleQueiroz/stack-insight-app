@@ -14,7 +14,7 @@
                 <td class="text-slate-500 px-4">{{ $support->content_body }}</td>
 {{--                <td class="text-slate-500 px-4">{{ count($support->total_replies) }}</td>--}}
                 <td class="text-slate-500 px-4">
-                    <x-replies-support>{{__(getQuantityReplies($support))}}</x-replies-support>
+                    <x-replies-support>{{__($support->total_replies)}}</x-replies-support>
                 </td>
                 <td class="px-4">
                     <x-status-support :status="$support->status"></x-status-support>

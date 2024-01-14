@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
-            $table->char('tokenable_type', 255);
-            $table->char('tokenable_id', 40);
-//            $table->morphs('tokenable');
+            $table->uuidMorphs('tokenable');
             $table->string('name');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();

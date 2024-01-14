@@ -29,8 +29,9 @@ class PaginationPresenter implements PaginateInterface
         $supports = $this->items;
         foreach ($supports as &$support) {
             $support->content_body = Str::limit($support->content_body, 38, '...');
+            $support_stdclass = $support;
             $support = (array)$support;
-            $support['total_replies'] = $support['replies'];
+            $support['total_replies'] = getQuantityReplies($support_stdclass);
             $support = (object)$support;
         }
         return $supports;
