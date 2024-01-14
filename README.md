@@ -1,11 +1,37 @@
 
-# Forum Application
-Developed using Laravel framework in version 10 + Docker.
+# Stack Insight
+O objetivo deste projeto foi aplicar os conhecimentos acerca de 
+boas práticas de desenvolvimento, conceitos de arquitetura e 
+um pouco de clean code. O sistema é um fórum de perguntas e 
+respostas, em que foram implementadas todas as lógicas referentes 
+a segurança mínima dos dados de cada usuário (ACL), alguns padrões 
+de projeto como Adapter, Repository, Service Layer, com o  intuito 
+de tornar o código da aplicação o mais  simples de corrigir, compreender 
+e principalmente reaproveitar. Tornado-a bastante escalável. Além de outros conceitos muito comuns no 
+desenvolvimento de software como eventos, listeners, Emails e outros.
 
-### Passo a passo
+### Tecnologias
+As ferramentas utilizadas foram as seguintes:
+
+-[x] Docker
+-[x] Laravel Framework - version 10
+-[x] Javascript
+-[x] PHP 8.1
+-[x] MySQL
+-[x] Redis
+
+### Telas
+
+![login.png](resources/img/login.png)
+
+![login.png](resources/img/home.png)
+
+![login.png](resources/img/questionandreplies.png)
+
+### Como executar
 Clone Repositório
 ```sh
-https://github.com/AguineleQueiroz/forum-laravel.git
+https://github.com/AguineleQueiroz/stack-insight-app.git
 ```
 ```sh
 cd app-laravel
