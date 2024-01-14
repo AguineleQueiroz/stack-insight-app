@@ -29,7 +29,11 @@
 
             <!-- Page Content -->
             <main class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8">
-                @yield('content')
+{{--                @yield('content')--}}
+                {{--or--}}
+                @if (isset($content))
+                    {{ $content }}
+                @endif
             </main>
         </div>
         @include('admin.layouts.scripts')

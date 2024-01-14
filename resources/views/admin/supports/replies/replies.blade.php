@@ -1,10 +1,5 @@
-@extends('layouts.app')
-<x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Suport') }}
-    </h2>
-</x-slot>
-@section('content')
+<x-app-layout>
+    <x-slot name="content">
     {{--  flash messages  --}}
     <x-messages></x-messages>
     <div class="flex border rounded-sm xl:p-8 p-8 w-full bg-white gap-4">
@@ -27,7 +22,7 @@
             <div class=" col flex max-sm:flex-col justify-between">
 
                 <div class=" flex items-center gap-2">
-                    <h1 class="font-medium mb-2 text-2xl">{{ $support->subject }}</h1>
+                    <h2 class="font-medium mb-2 text-xl">{{ $support->subject }}</h2>
                     <h5 class="m-0">
                         @if($support->status === "Active")
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-6 h-6">
@@ -119,4 +114,5 @@
             </button>
         </form>
     </div>
-@endsection
+</x-slot>
+</x-app-layout>

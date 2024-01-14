@@ -38,7 +38,7 @@
         </div>
 
         <div class="block mt-4">
-            <x-primary-button class="justify-center">
+            <x-primary-button class="justify-center w-full rounded-md">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
