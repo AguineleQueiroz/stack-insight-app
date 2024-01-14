@@ -13,12 +13,12 @@ desenvolvimento de software como eventos, listeners, Emails e outros.
 ### Tecnologias
 As ferramentas utilizadas foram as seguintes:
 
--[x] Docker
--[x] Laravel Framework - version 10
--[x] Javascript
--[x] PHP 8.1
--[x] MySQL
--[x] Redis
+- [x] Docker
+- [x] Laravel Framework - version 10
+- [x] Javascript
+- [x] PHP 8.1
+- [x] MySQL
+- [x] Redis
 
 ### Telas
 
