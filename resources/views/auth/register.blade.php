@@ -44,7 +44,7 @@
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="justify-center">
+            <x-primary-button class="justify-center w-full rounded-md">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
